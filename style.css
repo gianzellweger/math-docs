@@ -1,0 +1,645 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Open+Sans&display=swap");
+
+/*---------------------------------------------------------------------------------------------*/
+
+:root {
+    --dark-mode-color: rgb(42, 42, 42);
+    --menu-color: black;
+    --sidebar-width: max(15vw, 200px);
+    --content-width: 90vw;
+}
+
+body {
+    margin: 0px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+#map {
+    border: 10px solid rgb(134, 134, 134);
+    border-radius: 20px;
+    height: 70vh;
+    width: 65vw;
+    margin: auto;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+#header {
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%; 
+    width: max(100%, 100vw);
+    height: 10vh;
+    height: max(10vh, 80px);
+    left: 0px;
+    top: 0px;
+    padding: 1vh 1vw;
+    background-color: var(--menu-color);
+    z-index: 9;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header #logo {
+    height: 8vh;
+    height: max(8vh, 62.5px);
+    cursor: pointer;
+}
+
+#header #collapseSidebar {
+    padding: 1vh;
+    height: 6vh;
+    height: max(6vh, 50px);
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.25s ease;
+}
+
+#header #collapseSidebar:hover {
+    animation-name: fade;
+    animation-duration: 0.25s;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#header #collapseSidebar:active {
+    animation-name: fade;
+    animation-duration: 0.25s;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+#header #darkModeToggle {
+    height: 8vh;
+    height: max(8vh, 62.5px);
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.25s ease;
+}
+
+#header #darkModeToggle:hover {
+    animation-name: fade;
+    animation-duration: 0.25s;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#header #darkModeToggle:active {
+    animation-name: fade;
+    animation-duration: 0.25s;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+#header #searchForm, #sidebar #searchForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header #searchBar, #sidebar #searchBar {
+    font-family: 'Luxurious Roman', 'Times New Roman', Times, serif; 
+    border-radius: 20px 0 0 20px;
+    padding: 10px;
+}
+
+#header #searchButton, #sidebar #searchButton {
+    border-radius: 0 20px 20px 0;
+    padding: 10px;
+    height: 2vh;
+    width: 2vh;
+    cursor: pointer;
+    background-color: rgb(187, 187, 187);
+    transition: background-color 0.25s ease;
+}
+
+#header #searchButton:hover {
+    background-color: #696969;
+}
+
+#header #searchButton:active {
+    background-color: rgb(69, 69, 69);
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+@keyframes sideBarInactive {
+    from {
+        left: 0vw;
+    } to {
+        left: calc(0px - var(--sidebar-width));
+    }
+}
+
+@keyframes sideBarActive {
+    from {
+        left: calc(0px - var(--sidebar-width));
+    } to {
+        left: 0vw; 
+    }
+}
+
+#sidebar {
+    z-index: 10;
+    top: 10vh;
+    top: max(10vh, 80px);
+    position: fixed;
+    height: 90vh;
+    max-height: 90vh;
+    min-height: 90vh;
+    width: var(--sidebar-width);
+    background-color: var(--menu-color);
+    overflow-x: hidden;
+    overflow-y: auto;
+    left: calc(0px - var(--sidebar-width));
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar.inactive {
+    left: calc(0px - var(--sidebar-width)); 
+    animation-name: sideBarInactive;
+    animation-duration: 0.3s;
+}
+
+#sidebar.active {
+    left: 0vw; 
+    animation-name: sideBarActive;
+    animation-duration: 0.3s;
+}
+
+#sidebar .sideBarBlog {
+    color: white;
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    padding: 1.5vh 1vw;
+    margin-bottom: -1px;
+    height: min-content;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    text-align: center;
+    cursor: pointer;
+}
+
+#sidebar .sideBarBlog p {
+    font-size: medium;
+}
+
+#sidebar .sideBarBlog#currentBlog {
+    background-color: darkslategray;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+@keyframes darkToBright {
+    from {
+        color: white;
+        border-color: white;
+        background-color: var(--dark-mode-color);
+    } to {
+        color: black !important;
+        border-color: black;
+        background-color: white;
+    }
+}
+
+@keyframes brightToDark {
+    from {
+        color: black;
+        border-color: black;
+        background-color: white;
+    } to {
+        color: white !important;
+        border-color: white;
+        background-color: var(--dark-mode-color);
+    }
+}
+
+.dark {
+    color: white !important;
+    border-color: white !important;
+    background-color: var(--dark-mode-color);
+}
+
+.dark.animate {
+    animation-name: brightToDark;
+    animation-duration: 1s;
+}
+
+.bright {
+    color: black !important;
+    border-color: black !important;
+    background-color: white;
+}
+
+.bright.animate {
+    animation-name: darkToBright;
+    animation-duration: 1s;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+@keyframes wideCon {
+    from {
+        margin-left: calc(5vw + var(--sidebar-width));
+    } to {
+        margin-left: 5vw;
+    }
+}
+
+@keyframes smallCon {
+    from {
+        margin-left: 5vw;
+    } to {
+        margin-left: calc(5vw + var(--sidebar-width));
+    }
+}
+
+:where(#content) {
+    font-family: 'Luxurious Roman', 'Times New Roman', Times, serif;
+    margin: 12vh 5vw 0px 5vw;
+    margin: max(12vh, 100px) 5vw 0px 5vw;
+    font-size: medium;
+    min-height: 76vh;
+}
+
+#content .foundBlog {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+    border: 1px solid black;
+    width: 75%;
+    margin: 15px auto;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0;
+    transform: translate(0, 0);
+}
+
+#content .foundBlog:hover {
+    transform: translate(-10px, -10px);
+    box-shadow: 10px 10px;
+}
+
+#content #bigSearchForm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#content #bigSearchBar {
+    font-family: 'Luxurious Roman', 'Times New Roman', Times, serif;
+    width: 100%;
+    height: 4vh;
+    border-radius: 40px 0 0 40px;
+    padding: 10px;
+    font-size: large;
+}
+
+#content #bigSearchButton {
+    border-radius: 0 40px 40px 0;
+    padding: 10px;
+    height: 4vh;
+    width: 4vh;
+    cursor: pointer;
+    background-color: rgb(187, 187, 187);
+    transition: background-color 0.25s ease;
+}
+
+#content #bigSearchButton:hover {
+    background-color: #696969;
+}
+
+#content #bigSearchButton:active {
+    background-color: rgb(69, 69, 69);
+}
+
+#content table {
+    border-collapse: collapse;
+}
+
+#content #signature {
+    padding: 3vh 30%;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    display: block;
+}
+
+#content #desmos {
+    width: 100%;
+    height: 70vh;
+}
+
+#content.inactive {
+    animation-name: wideCon;
+    animation-duration: 0.3s;
+    margin-left: 5vw;
+}
+
+#content.active {
+    margin-left: calc(5vw + var(--sidebar-width));
+    animation-name: smallCon;
+    animation-duration: 0.3s;
+}
+
+#content > * {
+    margin: 5vh auto;
+    text-align: center;
+}
+
+#content p {
+    font-size: large;
+    font-weight: normal;
+    margin: 3.5vh auto;
+}
+
+#content #title {
+    margin: 3vh auto 10vh;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+#content #tableOfContents {
+    width: 50%;
+}
+
+#content #tableOfContents tr, #content #tableOfContents th {
+    border: 1px solid;
+    border-color: black;
+    padding: 1vh 0.5vw;
+}
+
+#content #tableOfContents td {
+    padding: 1vh;
+    font-size: large;
+}
+
+#content #tableOfContents th {
+    font-size: larger;
+}
+
+#content #ratingTable td, #content #ratingTable th {
+    border: 1px solid;
+    border-color: black;
+    padding: 1vh 0.5vw;
+}
+
+#content #ratingTable .star {
+    min-height: 30px;
+    height: 2vw;
+}
+
+#content #infoBox {
+    font-size: small;
+}
+
+#content #infoBox tr {
+    border: 1px solid black;
+}
+
+#content #infoBox td {
+    padding: 1vh 0.5vw;
+}
+
+#content #infoBox .infoName {
+    text-align: left;
+}
+
+#content #infoBox .infoValue {
+    text-align: right;
+}
+
+#content #openingTimesTable {
+    font-size: small;
+    margin: 0px auto;
+    font-size: large;
+}
+
+#content #openingTimesTable tr {
+    border: 1px solid black;
+}
+
+#content #openingTimesTable td {
+    padding: 1vh 0.5vw;
+}
+
+#content #openingTimesTable .openingTime {
+    text-align: right;
+}
+
+#content #openingTimesTable .openingDays {
+    text-align: left;
+}
+
+#content #images img {
+    min-width: 8vw;
+    min-width: max(8vw, 200px);
+    min-height: 8vw;
+    min-height: max(8vw, 200px);
+    max-width: 33vw;
+    max-width: max(33vw, 400px);
+    max-height: 25vw;
+    max-height: max(25vw, 300px);
+    margin: 4vh 2vw;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+@keyframes footerContract {
+    from {
+        margin-left: 0vw;
+    } to {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+@keyframes footerExpand {
+    from {
+        margin-left: var(--sidebar-width);
+    } to {
+        margin-left: 0vw;
+    }
+}
+
+#footer {
+    height: 100px;
+    margin: 0px;
+    bottom: 0px;
+    background-color: var(--menu-color);
+    color: white;
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+#footer.inactive {
+    animation-name: footerExpand;
+    animation-duration: 0.3s;
+    margin-left: 0vw;
+}
+
+#footer.active {
+    margin-left: var(--sidebar-width);
+    animation-name: footerContract;
+    animation-duration: 0.3s;
+}
+
+#footer * {
+    color: white;
+    margin: auto 5vw;
+}
+
+/*------------------------------Landing page stuff - ignore------------------------------------*/
+
+#content #blogs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#content .blog {
+    margin: 3vh 2vw;
+    padding: 0px 1.5vw;
+    width: 27vw;
+    width: max(27vw, 330px);
+    height: 60vh;
+    display: inline-block;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 5%;
+    position: static;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+#content .blog:not(.dark):not(.bright) {
+    border-color: black;
+}
+
+#content .blog .blogTitle {
+    font-size: medium;
+    font-size: max(3vh, 30px);
+}
+
+#content .blogImg {
+    width: 23vw;
+    width: max(23vw, 275px);
+    height: 30vh;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+@media only screen and (max-width: 768px) { /*generic mobile*/
+    
+    #map {
+        height: 30vh !important;
+        border-width: 0px;
+        width: calc(var(--content-width) - 5vw);
+    }
+    
+    /*-----------------------------------------------------------------------------------------*/
+    
+    #content #images img {
+        max-width: none;
+        max-height: none;
+        width: 80vw;
+        margin: 4vh 2vw;
+    }
+
+    #content .foundBlog {
+        width: 90% !important;
+    }
+    
+    /*-----------------------------------------------------------------------------------------*/
+    
+    @keyframes sideBarInactiveMobile {
+        from {
+            left: 0vw;
+        } to {
+            left: -71vw;
+        }
+    }
+    
+    @keyframes sideBarActiveMobile {
+        from {
+            left: -71vw;
+        } to {
+            left: 0vw; 
+        }
+    }
+    
+    #sidebar {
+        width: 66vw;
+        left: -71vw; 
+    }
+    
+    #sidebar.inactive {
+        left: -71vw; 
+        animation-name: sideBarInactiveMobile;
+        animation-duration: 0.3s;
+    }
+    
+    #sidebar.active {
+        left: 0vw; 
+        animation-name: sideBarActiveMobile;
+        animation-duration: 0.3s;
+    }
+    
+    /*-----------------------------------------------------------------------------------------*/
+    
+    #content {
+        margin-left: 5vw !important;
+        animation: none !important;
+    }
+    
+    #content #ratingTable .star {
+        min-height: 0px !important;
+        width: 6vw;
+        height: auto;
+    }
+    
+    /*-------------------------------------------------------------------------------------------*/
+    
+    #footer {
+        margin-left: 0vw !important;
+        animation: none !important;
+    }
+}
+
+@media (hover:none), (hover:on-demand) {  /*hover rules*/
+    #header #collapseSidebar:hover {
+        animation-name: fade;
+        animation-duration: 0.25s;
+        background-color: transparent !important;
+    }
+    
+    #header #darkModeToggle:hover {
+        animation-name: fade;
+        animation-duration: 0.25s;
+        background-color: transparent !important;
+    }
+
+    #content .foundBlog:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/*Easter Eggs*/
+
+.pride {
+    background: linear-gradient(132deg, rgb(221, 2, 3) 0.00%, rgb(251, 137, 2) 20.00%, rgb(248, 235, 5) 40.00%, rgb(0, 127, 38) 60.00%, rgb(5, 75, 249) 80.00%, rgb(114, 6, 130) 100.00%) !important;
+}

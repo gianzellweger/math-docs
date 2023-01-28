@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <script src="../index.js"></script>
+    <script type="text/javascript">
+        document.head.innerHTML += faviconText;
+        let Header = makeHeader()
+        document.body.appendChild(Header);
+        let content = functions.findBlog("gamma").makeBlog();
+        document.body.appendChild(content)
+        let sideBar = functions.makeSidebar();
+        document.body.appendChild(sideBar);
+        let footer = makeFooter()
+        document.body.appendChild(footer);
+        new MutationObserver(_ => toggleDarkmode(true)).observe(document.body, {childList: true});
+    </script>
+</body>
+</html>
