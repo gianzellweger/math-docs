@@ -1,4 +1,4 @@
-const baseURL = (isURL(location.href)) ? alert("Change baseURL and URL in 404.html") : ((location.href.slice(0, 7) == "file://") ? "file:///Users/gian/Desktop/Applescript%20Libraries/Math/website" : alert("unreachable"))
+const baseURL = (isURL(location.href)) ? "https://gianzellweger.github.io/math-docs" : ((location.href.slice(0, 7) == "file://") ? "file:///Users/gian/Desktop/Applescript%20Libraries/Math/website" : alert("unreachable"))
 
 class Func {
     constructor(name, text, shortDescription, outputArgs, inputArgs, desmosURL) {
