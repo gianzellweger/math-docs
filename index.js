@@ -521,7 +521,7 @@ function makeHeader() {
     logoWrapper.href = baseURL;
     const logo = new Image;
     logo.id = "logo";
-    logo.src = `${baseURL}/images/Logo.svg`;
+    logo.src = `${baseURL}/images/logo.svg`;
     logo.alt = "Return to Homepage";
     logoWrapper.appendChild(logo);
 
